@@ -1,0 +1,1315 @@
+/*
+Theme Name: New Style Barber
+Description: Tema hijo de Astra con estilo de barbería clásica para Peluquería New Style (Logroño).
+Author: Peluquería New Style
+Template: astra
+Version: 1.2.0
+Text Domain: newstyle-barber
+*/
+
+/* ---------- Tokens ---------- */
+:root {
+	--nsb-ink: #151515;
+	--nsb-ink-2: #1f1f1f;
+	--nsb-ink-3: #2a2a2a;
+	--nsb-cream: #f3ece0;
+	--nsb-cream-2: #e8dfcf;
+	--nsb-gold: #c9a45c;
+	--nsb-gold-2: #e0c07e;
+	--nsb-gold-text: #7a5a1c; /* gold for text on light backgrounds: 5.4:1 on cream */
+	--nsb-red: #b22234;
+	--nsb-blue: #1d3a8a;
+	--nsb-muted: #b9b2a6;
+	--nsb-display: "Oswald", "Arial Narrow", sans-serif;
+	--nsb-script: "Playfair Display", Georgia, serif;
+
+	/* Astra global palette */
+	--ast-global-color-0: var(--nsb-gold);
+	--ast-global-color-1: var(--nsb-gold-2);
+	--ast-global-color-2: var(--nsb-ink);
+	--ast-global-color-3: #3b3732;
+	--ast-global-color-4: var(--nsb-cream);
+	--ast-global-color-5: #ffffff;
+	--ast-global-color-6: var(--nsb-cream-2);
+	--ast-global-color-7: var(--nsb-ink-2);
+	--ast-global-color-8: var(--nsb-ink);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--nsb-cream);
+	color: #3b3732;
+}
+
+body.nsb-no-scroll {
+	overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6,
+.entry-title {
+	font-family: var(--nsb-display);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+/* ---------- Astra header ---------- */
+.site-header,
+.main-header-bar,
+.ast-primary-header-bar,
+.ast-mobile-header-wrap .ast-primary-header-bar,
+.ast-above-header-bar,
+.ast-below-header-bar {
+	background: var(--nsb-ink) !important;
+	border-bottom: 0 !important;
+}
+
+/* Sticky header (single-page site). Astra's transparent header mode makes it
+   absolute on the home page, and body overflow-x:hidden would break sticky,
+   so both are overridden. overflow-x:clip still prevents sideways scroll. */
+body {
+	overflow-x: clip !important;
+}
+
+.site-header,
+.ast-theme-transparent-header #masthead {
+	position: sticky !important;
+	top: 0;
+	z-index: 999;
+	border-bottom: 3px solid var(--nsb-gold) !important;
+}
+
+.admin-bar .site-header,
+.admin-bar.ast-theme-transparent-header #masthead {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	.admin-bar .site-header,
+	.admin-bar.ast-theme-transparent-header #masthead {
+		top: 46px;
+	}
+}
+
+@media (max-width: 600px) {
+	/* The admin bar scrolls away on small screens. */
+	.admin-bar .site-header,
+	.admin-bar.ast-theme-transparent-header #masthead {
+		top: 0;
+	}
+}
+
+html {
+	scroll-padding-top: var(--nsb-header-h, 110px);
+}
+
+.site-title,
+.site-title a,
+.site-title a:hover,
+.site-title a:focus {
+	color: var(--nsb-cream) !important;
+	font-family: var(--nsb-display) !important;
+	font-size: clamp(20px, 2.4vw, 26px) !important;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.site-title a::before {
+	content: "✂" / "";
+	margin-right: 10px;
+	color: var(--nsb-gold);
+}
+
+/* No social profiles provided: hide Astra's placeholder icons. */
+.ast-header-social-wrap,
+.ast-builder-layout-element[data-section*="social-icons"] {
+	display: none !important;
+}
+
+.site-description {
+	color: var(--nsb-muted) !important;
+}
+
+.ast-builder-menu .main-navigation .menu-link,
+.ast-builder-menu-1 .menu-item > .menu-link,
+.main-header-menu .menu-link {
+	color: var(--nsb-cream) !important;
+	font-family: var(--nsb-display);
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+}
+
+.ast-builder-menu-1 .menu-item > .menu-link:hover,
+.ast-builder-menu-1 .menu-item.current-menu-item > .menu-link,
+.main-header-menu .menu-link:hover {
+	color: var(--nsb-gold) !important;
+}
+
+/* Phone number in the main menu */
+.main-header-menu .nsb-menu-phone > .menu-link,
+.ast-builder-menu-1 .nsb-menu-phone > .menu-link {
+	color: var(--nsb-gold) !important;
+	font-size: 22px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	white-space: nowrap;
+}
+
+.main-header-menu .nsb-menu-phone > .menu-link:hover,
+.ast-builder-menu-1 .nsb-menu-phone > .menu-link:hover {
+	color: var(--nsb-gold-2) !important;
+}
+
+/* Menu labels never break mid-word. */
+.main-header-menu .menu-link {
+	white-space: nowrap;
+}
+
+@media (min-width: 922px) {
+	.ast-builder-menu-1 .menu-item > .menu-link {
+		padding-left: 0.75em !important;
+		padding-right: 0.75em !important;
+	}
+}
+
+/* Language switcher (TranslatePress) as a small outlined button. */
+.main-header-menu .trp-language-switcher-container > .menu-link {
+	display: inline-flex !important;
+	align-items: center;
+	margin-left: 8px;
+	padding: 6px 12px !important;
+	border: 1px solid var(--nsb-gold);
+	border-radius: 2px;
+	color: var(--nsb-cream) !important;
+	font-size: 13px;
+	line-height: 1.2;
+}
+
+.main-header-menu .trp-language-switcher-container > .menu-link:hover,
+.main-header-menu .trp-language-switcher-container > .menu-link:focus-visible {
+	background: var(--nsb-gold);
+	color: var(--nsb-ink) !important;
+}
+
+@media (max-width: 921px) {
+	.main-header-menu .trp-language-switcher-container > .menu-link {
+		margin: 12px 20px;
+	}
+}
+
+.nsb-menu-phone__icon {
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 1.1em;
+}
+
+@media (min-width: 922px) {
+	.main-header-menu {
+		flex-wrap: nowrap;
+	}
+
+	.main-header-menu .nsb-menu-phone {
+		margin-left: 12px;
+		padding-left: 12px;
+		border-left: 1px solid var(--nsb-ink-3);
+	}
+}
+
+/* Medium screens: tighten the menu so the phone stays on one line. */
+@media (min-width: 922px) and (max-width: 1240px) {
+	.site-title,
+	.site-title a {
+		font-size: 19px !important;
+	}
+
+	.site-title a::before {
+		margin-right: 6px;
+	}
+
+	.ast-builder-menu-1 .menu-item > .menu-link {
+		padding-left: 0.6em !important;
+		padding-right: 0.6em !important;
+		font-size: 13px;
+		letter-spacing: 0.08em;
+	}
+
+	.ast-builder-menu-1 .nsb-menu-phone > .menu-link {
+		font-size: 18px;
+	}
+
+	.main-header-menu .nsb-menu-phone {
+		margin-left: 6px;
+		padding-left: 6px;
+	}
+}
+
+.ast-mobile-popup-drawer .ast-mobile-popup-inner,
+.ast-header-break-point .main-header-menu,
+.ast-mobile-header-content,
+.ast-mobile-header-content .main-header-menu {
+	background: var(--nsb-ink-2) !important;
+}
+
+.ast-mobile-header-content .menu-item,
+.ast-header-break-point .main-header-menu .menu-item {
+	border-color: var(--nsb-ink-3) !important;
+}
+
+.menu-toggle,
+.ast-mobile-menu-trigger-minimal,
+.ast-button-wrap .menu-toggle {
+	color: var(--nsb-gold) !important;
+	background: transparent !important;
+}
+
+.menu-toggle .ast-mobile-svg {
+	fill: var(--nsb-gold) !important;
+}
+
+/* ---------- Astra footer ---------- */
+.site-footer,
+.site-primary-footer-wrap,
+.site-above-footer-wrap,
+.site-below-footer-wrap {
+	background: var(--nsb-ink) !important;
+	border-top: 0 !important;
+	color: var(--nsb-muted);
+}
+
+.site-footer {
+	border-top: 3px solid var(--nsb-gold) !important;
+}
+
+.ast-footer-copyright,
+.ast-footer-copyright p {
+	color: var(--nsb-muted);
+	font-size: 14px;
+	letter-spacing: 0.04em;
+}
+
+.site-footer a,
+.ast-footer-copyright a {
+	color: var(--nsb-gold);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.ast-footer-copyright .nsb-footer-links {
+	display: inline-block;
+	margin-top: 6px;
+}
+
+/* ---------- Kit Digital funding band ---------- */
+/* Official artwork on white, as the EU/PRTR graphic rules require.
+   The EU emblem is kept well over 30% larger than the PRTR logo. */
+.nsb-funding {
+	background: #ffffff;
+	border-top: 1px solid #e5e5e5;
+}
+
+.nsb-funding__inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 24px clamp(32px, 6vw, 72px);
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 28px clamp(16px, 4vw, 40px);
+}
+
+.nsb-funding img {
+	display: block;
+	width: auto;
+	max-width: 100%;
+}
+
+.nsb-funding .nsb-funding__eu {
+	height: 80px;
+}
+
+.nsb-funding .nsb-funding__prtr {
+	height: 50px;
+}
+
+@media (max-width: 640px) {
+	.nsb-funding__inner {
+		flex-direction: column;
+	}
+
+	.nsb-funding .nsb-funding__eu {
+		height: auto;
+		width: 280px;
+	}
+
+	.nsb-funding .nsb-funding__prtr {
+		height: auto;
+		width: 180px;
+	}
+}
+
+/* ---------- Generic buttons for inner pages ---------- */
+.wp-block-button__link,
+.ast-button,
+button.button,
+input[type="submit"] {
+	background-color: var(--nsb-gold);
+	color: var(--nsb-ink);
+	font-family: var(--nsb-display);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	border-radius: 2px;
+}
+
+/* ---------- Accessibility ---------- */
+/* Visible keyboard focus everywhere (WCAG 2.4.7). */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+iframe:focus-visible {
+	outline: 3px solid var(--nsb-gold) !important;
+	outline-offset: 3px;
+}
+
+.nsb-section--light a:focus-visible,
+.nsb-section--light button:focus-visible,
+.nsb-funding a:focus-visible {
+	outline-color: var(--nsb-ink) !important;
+}
+
+/* Skip link: visible on focus, above the sticky header. */
+.skip-link.screen-reader-text:focus {
+	z-index: 100001;
+	background: var(--nsb-gold);
+	color: var(--nsb-ink);
+	font-weight: 600;
+}
+
+/* Inner pages (statement, legal pages…): spacing and headings in the site style. */
+body:not(.home) .site-content #primary {
+	margin-top: 0;
+	padding-top: clamp(40px, 6vw, 72px);
+	padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+.entry-content h2,
+.entry-content h3,
+.entry-content h4 {
+	font-family: var(--nsb-display);
+	font-weight: 600;
+	color: var(--nsb-ink);
+	line-height: 1.2;
+	margin-top: 1.6em;
+	margin-bottom: 0.5em;
+}
+
+.entry-content h2 {
+	font-size: clamp(24px, 3vw, 30px);
+}
+
+.entry-content h3 {
+	font-size: clamp(20px, 2.4vw, 24px);
+}
+
+.entry-content {
+	max-width: 820px;
+}
+
+/* Links inside page/post text (white background): dark gold + underline. */
+.entry-content a:not(.wp-block-button__link) {
+	color: var(--nsb-gold-text);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.entry-content a:not(.wp-block-button__link):hover {
+	color: var(--nsb-ink);
+}
+
+/* Gold text on cream sections uses the darker tone for contrast. */
+.nsb-section--light .nsb-eyebrow,
+.nsb-section--light .nsb-script,
+.nsb-section--light h2 em {
+	color: var(--nsb-gold-text);
+}
+
+.nsb address {
+	margin: 0;
+	font-style: normal;
+}
+
+/* ---------- Front page ---------- */
+.nsb {
+	--nsb-gutter: clamp(16px, 4vw, 40px);
+	overflow-x: hidden;
+}
+
+.home #content > .ast-container,
+.home .site-content > .ast-container {
+	max-width: none;
+	padding: 0;
+	display: block;
+}
+
+/* Grid/flex containers built from blocks: drop WordPress's automatic
+   block spacing (the layout gap handles it). */
+.nsb-hero__inner > *,
+.nsb-container > *,
+.nsb-heading > *,
+.nsb-services > *,
+.nsb-service > *,
+.nsb-about > *,
+.nsb-stats > *,
+.nsb-contact > * {
+	margin-block-start: 0;
+}
+
+.nsb-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 var(--nsb-gutter);
+}
+
+.nsb h1,
+.nsb h2,
+.nsb h3 {
+	margin: 0;
+	line-height: 1.1;
+}
+
+.nsb-script,
+.nsb-hero__title em,
+.nsb h2 em {
+	display: block;
+	font-family: var(--nsb-script);
+	font-style: italic;
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--nsb-gold);
+}
+
+.nsb-eyebrow {
+	margin: 0 0 12px;
+	font-family: var(--nsb-display);
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.3em;
+	color: var(--nsb-gold);
+}
+
+.nsb-heading::after {
+	content: "";
+	display: block;
+	width: 120px;
+	height: 12px;
+	margin: 20px auto 0;
+	background:
+		linear-gradient(var(--nsb-gold), var(--nsb-gold)) left center / 44px 2px no-repeat,
+		linear-gradient(var(--nsb-gold), var(--nsb-gold)) right center / 44px 2px no-repeat,
+		radial-gradient(circle, var(--nsb-gold) 0 4px, transparent 5px) center / 12px 12px no-repeat;
+}
+
+/* Buttons (core Button block with the theme's block styles) */
+.nsb-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px !important;
+	margin-top: 32px;
+}
+
+.nsb .wp-block-button .wp-block-button__link {
+	display: inline-block;
+	padding: 14px 28px;
+	border: 2px solid var(--nsb-gold);
+	border-radius: 2px;
+	background: transparent;
+	font-family: var(--nsb-display);
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	text-decoration: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.nsb .is-style-nsb-gold .wp-block-button__link {
+	background: var(--nsb-gold);
+	color: var(--nsb-ink);
+}
+
+.nsb .is-style-nsb-gold .wp-block-button__link:hover,
+.nsb .is-style-nsb-gold .wp-block-button__link:focus {
+	background: var(--nsb-gold-2);
+	border-color: var(--nsb-gold-2);
+	color: var(--nsb-ink);
+}
+
+.nsb .is-style-nsb-ghost .wp-block-button__link {
+	color: var(--nsb-cream);
+	border-color: var(--nsb-cream);
+}
+
+.nsb .is-style-nsb-ghost .wp-block-button__link:hover,
+.nsb .is-style-nsb-ghost .wp-block-button__link:focus {
+	background: var(--nsb-cream);
+	color: var(--nsb-ink);
+}
+
+.nsb .is-style-nsb-outline .wp-block-button__link {
+	color: var(--nsb-ink);
+	border-color: var(--nsb-ink);
+}
+
+.nsb .is-style-nsb-outline .wp-block-button__link:hover,
+.nsb .is-style-nsb-outline .wp-block-button__link:focus {
+	background: var(--nsb-ink);
+	color: var(--nsb-cream);
+}
+
+/* Barber pole motifs */
+.nsb-stripe-top::before,
+.nsb-hero__photo::after {
+	background: repeating-linear-gradient(
+		-45deg,
+		var(--nsb-red) 0 14px,
+		#fff 14px 28px,
+		var(--nsb-blue) 28px 42px,
+		#fff 42px 56px
+	);
+}
+
+.nsb-stripe-top {
+	position: relative;
+}
+
+.nsb-stripe-top::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 10px;
+}
+
+.nsb-hero__photo::after {
+	content: "";
+	position: absolute;
+	right: -28px;
+	top: 12%;
+	bottom: 12%;
+	width: 18px;
+	border-radius: 9px;
+	box-shadow: 0 0 0 4px var(--nsb-gold), 0 0 0 7px var(--nsb-ink);
+	background-size: 100% 400px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+/* Hero */
+.nsb-hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: min(88vh, 820px);
+	padding: clamp(56px, 8vw, 96px) 0;
+	color: var(--nsb-cream);
+	background:
+		radial-gradient(ellipse at 75% 40%, rgba(201, 164, 92, 0.14), transparent 60%),
+		var(--nsb-ink);
+}
+
+.nsb-hero__inner {
+	display: grid;
+	grid-template-columns: 1.2fr 0.8fr;
+	gap: clamp(32px, 6vw, 80px);
+	align-items: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 var(--nsb-gutter);
+}
+
+.nsb-hero__photo {
+	position: relative;
+	margin: 0 28px 0 0 !important;
+}
+
+.nsb-hero__photo::before {
+	content: "";
+	position: absolute;
+	inset: -16px 16px 16px -16px;
+	border: 2px solid var(--nsb-gold);
+}
+
+.nsb-hero__photo img {
+	position: relative;
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: center 40%;
+}
+
+.nsb-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 92px;
+	height: 92px;
+	margin-bottom: 28px;
+	border: 2px solid var(--nsb-gold);
+	border-radius: 50%;
+	outline: 1px solid var(--nsb-gold);
+	outline-offset: 4px;
+	font-family: var(--nsb-display);
+	font-size: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	line-height: 1.2;
+	color: var(--nsb-gold);
+	padding: 8px;
+}
+
+.nsb-hero__title {
+	font-size: clamp(52px, 10vw, 112px);
+	font-weight: 700;
+	color: var(--nsb-cream);
+	letter-spacing: 0.03em;
+}
+
+.nsb-hero__title em {
+	font-size: 0.42em;
+	margin-bottom: 4px;
+}
+
+.nsb-hero__lead {
+	max-width: 520px;
+	margin: 24px 0 0;
+	font-size: clamp(17px, 2vw, 20px);
+	line-height: 1.6;
+	color: var(--nsb-cream-2);
+}
+
+/* Sections */
+.nsb-section {
+	padding: clamp(72px, 10vw, 120px) 0;
+}
+
+.nsb-section--dark {
+	background: var(--nsb-ink-2);
+	color: var(--nsb-muted);
+}
+
+.nsb-section--dark h2,
+.nsb-section--dark h3 {
+	color: var(--nsb-cream);
+}
+
+.nsb-section--light {
+	background: var(--nsb-cream);
+	color: #3b3732;
+}
+
+.nsb-section--light h2 {
+	color: var(--nsb-ink);
+}
+
+.nsb-heading {
+	margin-bottom: 56px;
+	text-align: center;
+}
+
+.nsb-heading h2,
+.nsb-about h2,
+.nsb-contact h2 {
+	font-size: clamp(38px, 6vw, 60px);
+}
+
+/* Services */
+.nsb-services {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 24px;
+}
+
+.nsb-service {
+	background: var(--nsb-ink);
+	border: 1px solid var(--nsb-ink-3);
+	transition: border-color 0.25s, transform 0.25s;
+}
+
+.nsb-service:hover {
+	border-color: var(--nsb-gold);
+	transform: translateY(-4px);
+}
+
+.nsb-service__img {
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	margin: 0 !important;
+}
+
+.nsb-service__img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 30%;
+	filter: grayscale(0.35) contrast(1.05);
+}
+
+.nsb-service h3 {
+	margin: 20px 20px 8px;
+	font-size: 20px;
+}
+
+.nsb-service p {
+	margin: 0 20px 24px;
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+/* About */
+.nsb-about {
+	display: grid;
+	grid-template-columns: 1.15fr 0.85fr;
+	gap: clamp(32px, 6vw, 80px);
+	align-items: center;
+}
+
+.nsb-about h2 em {
+	font-size: 0.6em;
+	margin-top: 6px;
+}
+
+.nsb-about__text p {
+	margin: 20px 0 0;
+	font-size: 17px;
+	line-height: 1.75;
+}
+
+.nsb-about__text .nsb-eyebrow {
+	margin: 0 0 12px;
+	font-size: 14px;
+}
+
+.nsb-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	margin: 36px 0 0;
+	padding-top: 28px;
+	border-top: 1px solid rgba(21, 21, 21, 0.15);
+}
+
+.nsb-stats__item p {
+	margin: 0 !important;
+}
+
+.nsb-stats .nsb-stats__value {
+	font-family: var(--nsb-display);
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--nsb-ink);
+}
+
+.nsb-stats .nsb-stats__label {
+	margin-top: 8px !important;
+	font-family: var(--nsb-display);
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	color: var(--nsb-gold-text);
+}
+
+.nsb-about__photo {
+	position: relative;
+	margin: 0 !important;
+}
+
+.nsb-about__photo::before {
+	content: "";
+	position: absolute;
+	inset: 18px -18px -18px 18px;
+	border: 2px solid var(--nsb-gold);
+}
+
+.nsb-about__photo img {
+	position: relative;
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+}
+
+/* Gallery (core Gallery block, "Cuadrícula con ampliación" style) */
+.nsb .wp-block-gallery.is-style-nsb-lightbox {
+	display: grid !important;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px !important;
+	margin: 0;
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image {
+	width: auto !important;
+	margin: 0 !important;
+	aspect-ratio: 3 / 4;
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: var(--nsb-ink);
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	object-position: center 35%;
+	transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 2px solid transparent;
+	transition: border-color 0.3s, inset 0.3s;
+	pointer-events: none;
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a:hover img,
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a:focus-visible img {
+	transform: scale(1.06);
+	filter: brightness(1.05);
+}
+
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a:hover::after,
+.nsb .wp-block-gallery.is-style-nsb-lightbox .wp-block-image a:focus-visible::after {
+	inset: 10px;
+	border-color: var(--nsb-gold);
+}
+
+/* Lightbox */
+.nsb-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 56px 64px;
+	background: rgba(10, 10, 10, 0.94);
+}
+
+.nsb-lightbox[hidden] {
+	display: none;
+}
+
+.nsb-lightbox__img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+	box-shadow: 0 0 0 2px var(--nsb-gold);
+}
+
+.nsb-lightbox button {
+	position: absolute;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--nsb-cream);
+	font-size: 48px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.nsb-lightbox button:hover,
+.nsb-lightbox button:focus-visible {
+	color: var(--nsb-gold);
+	background: transparent;
+}
+
+.nsb-lightbox__close {
+	top: 12px;
+	right: 20px;
+}
+
+.nsb-lightbox__prev {
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 64px !important;
+}
+
+.nsb-lightbox__next {
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 64px !important;
+}
+
+.nsb-lightbox__count {
+	position: absolute;
+	bottom: 16px;
+	left: 0;
+	right: 0;
+	margin: 0;
+	text-align: center;
+	font-family: var(--nsb-display);
+	letter-spacing: 0.2em;
+	color: var(--nsb-muted);
+}
+
+
+/* Espacio carousel */
+.nsb-section--ink {
+	background: var(--nsb-ink);
+	color: var(--nsb-muted);
+}
+
+.nsb-section--ink h2 {
+	color: var(--nsb-cream);
+}
+
+.nsb-carousel {
+	position: relative;
+}
+
+.nsb .nsb-carousel__track {
+	display: grid !important;
+	flex-wrap: nowrap !important;
+	row-gap: 0 !important;
+	grid-auto-flow: column;
+	grid-auto-columns: calc((100% - 2 * 16px) / 3);
+	column-gap: 16px !important;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+	overscroll-behavior-x: contain;
+}
+
+.nsb-carousel__track::-webkit-scrollbar {
+	display: none;
+}
+
+.nsb .nsb-carousel__track .nsb-carousel__slide {
+	width: auto !important;
+	margin: 0 !important;
+	scroll-snap-align: start;
+	border: 2px solid var(--nsb-ink-3);
+}
+
+.nsb .nsb-carousel__track .nsb-carousel__slide img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+}
+
+.nsb-carousel__btn {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	padding: 0 0 6px;
+	border: 2px solid var(--nsb-gold);
+	border-radius: 50%;
+	background: rgba(21, 21, 21, 0.85);
+	color: var(--nsb-gold);
+	font-size: 36px;
+	line-height: 1;
+	cursor: pointer;
+	transform: translateY(-50%);
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.nsb-carousel__btn:hover,
+.nsb-carousel__btn:focus-visible {
+	background: var(--nsb-gold);
+	color: var(--nsb-ink);
+}
+
+.nsb-carousel__prev {
+	left: -26px;
+}
+
+.nsb-carousel__next {
+	right: -26px;
+}
+
+.nsb-carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 4px;
+	margin-top: 24px;
+}
+
+.nsb-carousel__dot {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+}
+
+.nsb-carousel__dot::before {
+	content: "";
+	position: absolute;
+	inset: 6px;
+	border: 2px solid var(--nsb-gold);
+	border-radius: 50%;
+}
+
+.nsb-carousel__dot:hover,
+.nsb-carousel__dot:focus {
+	background: transparent;
+}
+
+.nsb-carousel__dot[aria-current="true"]::before {
+	background: var(--nsb-gold);
+}
+
+/* Pause / play */
+.nsb-carousel__controls {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 14px;
+}
+
+.nsb-carousel .nsb-carousel__toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 36px;
+	padding: 6px 14px;
+	border: 1px solid var(--nsb-gold);
+	border-radius: 2px;
+	background: transparent;
+	color: var(--nsb-gold);
+	font-family: var(--nsb-display);
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	cursor: pointer;
+}
+
+.nsb-carousel .nsb-carousel__toggle:hover,
+.nsb-carousel .nsb-carousel__toggle:focus-visible {
+	background: var(--nsb-gold);
+	color: var(--nsb-ink);
+}
+
+/* Pause icon (two bars) / play icon (triangle) */
+.nsb-carousel__toggle-icon {
+	width: 10px;
+	height: 12px;
+	border-left: 3px solid currentColor;
+	border-right: 3px solid currentColor;
+}
+
+.nsb-carousel__toggle.is-paused .nsb-carousel__toggle-icon {
+	border-style: solid;
+	border-width: 6px 0 6px 10px;
+	border-color: transparent transparent transparent currentColor;
+	width: 0;
+	height: 0;
+}
+
+.nsb-carousel__track:focus-visible {
+	outline: 3px solid var(--nsb-gold);
+	outline-offset: 4px;
+}
+
+/* Contact */
+.nsb-contact {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(32px, 6vw, 80px);
+	align-items: center;
+}
+
+.nsb-contact__info .nsb-contact__label {
+	margin: 0;
+	padding-top: 18px;
+}
+
+.nsb-contact__info .nsb-contact__value {
+	margin: 0;
+	padding: 4px 0 18px;
+	border-bottom: 1px solid rgba(21, 21, 21, 0.15);
+	font-size: 18px;
+	line-height: 1.6;
+	color: var(--nsb-ink);
+}
+
+.nsb-contact__info h2 + .nsb-contact__label {
+	margin-top: 10px;
+}
+
+.nsb-contact__phone a {
+	color: var(--nsb-ink);
+	font-family: var(--nsb-display);
+	font-size: 26px;
+	letter-spacing: 0.06em;
+	text-decoration: none;
+}
+
+.nsb-contact__phone a:hover {
+	color: var(--nsb-red);
+}
+
+.nsb-contact__label {
+	display: block;
+	margin-bottom: 4px;
+	font-family: var(--nsb-display);
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.25em;
+	color: var(--nsb-gold-text);
+}
+
+.nsb-contact__map {
+	position: relative;
+	border: 2px solid var(--nsb-ink);
+	box-shadow: 12px 12px 0 var(--nsb-gold);
+}
+
+.nsb-contact__map iframe {
+	display: block;
+	width: 100%;
+	height: 420px;
+	border: 0;
+	filter: grayscale(0.6) sepia(0.15);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+	.nsb .wp-block-gallery.is-style-nsb-lightbox {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 860px) {
+	.nsb-carousel__track {
+		grid-auto-columns: calc((100% - 16px) / 2);
+	}
+
+	.nsb-hero__inner,
+	.nsb-about,
+	.nsb-contact {
+		grid-template-columns: 1fr;
+	}
+
+	/* Single column: center text, buttons, stats and photos. */
+	.nsb-hero__text,
+	.nsb-about__text {
+		text-align: center;
+	}
+
+	.nsb-hero__lead {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.nsb-actions,
+	.nsb-stats {
+		justify-content: center;
+	}
+
+	.nsb-about__photo,
+	.nsb-hero__photo {
+		justify-self: center;
+		width: calc(100% - 56px);
+		max-width: 420px;
+		margin: 0 auto;
+	}
+
+	.nsb-hero__photo {
+		margin-top: 16px;
+	}
+
+	.nsb-about__photo {
+		margin-bottom: 18px;
+	}
+}
+
+@media (max-width: 640px) {
+	.nsb-carousel__track {
+		grid-auto-columns: 85%;
+		column-gap: 12px !important;
+	}
+
+	.nsb-carousel__btn {
+		width: 44px;
+		height: 44px;
+		font-size: 30px;
+	}
+
+	.nsb-carousel__prev {
+		left: 6px;
+	}
+
+	.nsb-carousel__next {
+		right: 6px;
+	}
+
+	.nsb .wp-block-gallery.is-style-nsb-lightbox {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px !important;
+	}
+
+	.nsb-actions .wp-block-button {
+		flex: 1 1 100%;
+	}
+
+	.nsb-actions .wp-block-button__link {
+		width: 100%;
+		text-align: center;
+	}
+
+	.nsb-lightbox {
+		padding: 56px 12px;
+	}
+
+	.nsb-lightbox__prev,
+	.nsb-lightbox__next {
+		top: auto;
+		bottom: 4px;
+		transform: none;
+	}
+
+	.nsb-contact__map {
+		margin-right: 12px;
+	}
+
+	.nsb-contact__map iframe {
+		height: 320px;
+	}
+}

@@ -1,0 +1,70 @@
+# ------------------------------------------------------------------
+# WordPress (Docker setup: only wp-content/ is bind-mounted and tracked)
+# ------------------------------------------------------------------
+
+# Core files, in case they ever end up in the repo root.
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/index.php
+/xmlrpc.php
+/license.txt
+/readme.html
+
+# Configuration and secrets
+wp-config.php
+.htaccess
+.env
+.env.*
+!.env.example
+
+# User uploads (media library content lives in the database + server)
+wp-content/uploads/
+wp-content/updraft/
+
+# Runtime / generated files
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/cache/
+wp-content/backup*/
+wp-content/backups/
+wp-content/wflogs/
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/db.php
+wp-content/debug.log
+*.log
+
+# Database dumps and archives
+*.sql
+*.sql.gz
+*.zip
+*.tar.gz
+
+# ------------------------------------------------------------------
+# Project
+# ------------------------------------------------------------------
+
+# Kit Digital paperwork (grant documents with business/personal data)
+kit-digital-documents/
+info.txt
+kit-digital-captura.png
+images-barbershop/
+
+# LibreOffice / MS Office lock files
+.~lock.*#
+~$*
+
+# ------------------------------------------------------------------
+# Tooling, OS and editors
+# ------------------------------------------------------------------
+node_modules/
+vendor/
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
