@@ -187,7 +187,7 @@ function nsb_footer_copyright() {
 		);
 	}
 	return sprintf(
-		'© %1$s %2$s · %3$s, %4$s %5$s · <a href="%6$s">%7$s</a>%8$s',
+		'© %1$s %2$s · %3$s, %4$s %5$s · <a href="%6$s">%7$s</a> · <a href="%9$s">Instagram</a>%8$s',
 		gmdate( 'Y' ),
 		esc_html( $info['name'] ),
 		esc_html( $info['address'] ),
@@ -195,7 +195,8 @@ function nsb_footer_copyright() {
 		esc_html( $info['city'] ),
 		esc_attr( $info['phone_href'] ),
 		esc_html( $info['phone'] ),
-		$links
+		$links,
+		esc_url( $info['instagram'] )
 	);
 }
 add_filter( 'astra_get_option_footer-copyright-editor', 'nsb_footer_copyright' );
@@ -285,6 +286,7 @@ function nsb_seo_head() {
 		),
 		'hasMap'       => 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $info['maps_query'] ),
 		'areaServed'   => $info['city'],
+		'sameAs'       => array( $info['instagram'] ),
 	);
 	printf(
 		"<script type=\"application/ld+json\">%s</script>\n",
@@ -454,15 +456,15 @@ function nsb_create_accessibility_page() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Este sitio web es <strong>parcialmente conforme</strong> con las WCAG 2.1 nivel AA debido al contenido de terceros que se indica a continuación.</p>
+<p>Este sitio web es <strong>plenamente conforme</strong> con las WCAG 2.1 nivel AA.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Contenido no accesible</h2>
+<h2 class="wp-block-heading">Contenido de terceros</h2>
 <!-- /wp:heading -->
 
 <!-- wp:list -->
-<ul class="wp-block-list"><li>El mapa de Google Maps de la sección de contacto es un servicio de terceros cuya accesibilidad no controlamos. La misma información (dirección y enlace «Cómo llegar») se ofrece en texto junto al mapa.</li></ul>
+<ul class="wp-block-list"><li>El mapa de Google Maps de la sección de contacto es un servicio de terceros que no ha sido desarrollado por ' . esc_html( $info['name'] ) . ' ni está bajo su control, por lo que queda fuera del alcance de esta declaración (Real Decreto 1112/2018). La misma información (dirección y enlace «Cómo llegar») se ofrece en texto junto al mapa.</li></ul>
 <!-- /wp:list -->
 
 <!-- wp:heading -->
@@ -470,7 +472,7 @@ function nsb_create_accessibility_page() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Esta declaración se preparó el ' . esc_html( date_i18n( 'j \d\e F \d\e Y' ) ) . ' mediante una autoevaluación del sitio con herramientas automáticas y revisión manual (navegación con teclado, contraste de colores, textos alternativos, idioma de la página y estructura de encabezados).</p>
+<p>Esta declaración se preparó el ' . esc_html( date_i18n( 'j \d\e F \d\e Y' ) ) . ' mediante una autoevaluación del sitio con herramientas automáticas y revisión manual (navegación con teclado, contraste de colores, textos alternativos, idioma de la página, estructura de encabezados, reajuste del contenido y espaciado del texto).</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

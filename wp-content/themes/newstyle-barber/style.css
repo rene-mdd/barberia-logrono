@@ -1181,6 +1181,16 @@ body:not(.home) .site-content #primary {
 	text-decoration: none;
 }
 
+.nsb-contact__instagram a {
+	color: var(--nsb-ink);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.nsb-contact__instagram a:hover {
+	color: var(--nsb-red);
+}
+
 .nsb-contact__phone a:hover {
 	color: var(--nsb-red);
 }

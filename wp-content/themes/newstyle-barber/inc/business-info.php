@@ -27,6 +27,7 @@ function nsb_info() {
 		'phone'       => '632 895 661',
 		'phone_href'  => 'tel:+34632895661',
 		'maps_query'  => 'Plaza 1 de Mayo 10, 26002 Logroño',
+		'instagram'   => 'https://www.instagram.com/newstylepeluqueria01/',
 	);
 }
 
