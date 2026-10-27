@@ -431,9 +431,9 @@ body:not(.home) .site-content #primary {
 }
 
 /* Gold text on cream sections uses the darker tone for contrast. */
-.nsb-section--light .nsb-eyebrow,
-.nsb-section--light .nsb-script,
-.nsb-section--light h2 em {
+.nsb .nsb-section--light .nsb-eyebrow,
+.nsb .nsb-section--light .nsb-script,
+.nsb .nsb-section--light h2 em {
 	color: var(--nsb-gold-text);
 }
 
